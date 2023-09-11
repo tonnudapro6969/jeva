@@ -9,7 +9,11 @@ public class h2 {
 		
 		System.out.println(jagamine + "  meetrit");
 	    number2();
-        number3();
+        
+        number3(300);
+        
+        number4();
+
     }
 
     static void number2(){
@@ -21,20 +25,31 @@ public class h2 {
         float arv = c*d*pi;
         System.out.println( arv + "HJAJHAHAJA" );    
     }
-    static void number3(){
+    static void number3(int arv){
         
-        int minart = 300;
-        long hours = ( minart /60);
-        System.out.printf(hours + "  tund?" );
+        
+        long hours = ( arv /60);
+        System.out.printf(hours + "  tundi?" );
 
     }
-
-
-
-
-
-
+    static void number4(){
+            double s1 = sportlasekiirus(50, 876431);
+            double s2 = sportlasekiirus(2000, 90);
+            double vahe = s1 - s2;
+            System.out.println("kiirus vahe " + Math.abs(vahe)  );
+    
+        }
+            static double sportlasekiirus(int dis, int aeg){
+                double kiirus = dis / aeg;
+    
+                System.out.println( kiirus + "m/s?");
+                return kiirus;
+            }
 }
+
+        
+        
+    
 
 
 
