@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+// tonis kandmaa it-22
 public class ylesanne5 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -15,9 +15,10 @@ public class ylesanne5 {
                 double tulemus = esimeneArv / teineArv;
                 System.out.println("vastus: " + tulemus);
             } else {
-                System.out.println("Midagi on valesti. Soovitan vetsus enesetapp sooritada")
+                System.out.println("Midagi on valesti. Soovitan vetsus enesetapp sooritada");
         }
         
         scanner.close();
     }
+}
 }
