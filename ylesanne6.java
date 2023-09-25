@@ -1,76 +1,65 @@
 
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner; 
-public class ylesanne6 {
 // tonis kandma it.-222 jahrjusuts 6
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
-	public static void main(String[] args) {
-        
-		Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter integers (leave blank to finish):");
-        
-        int sum = 0;
-        int count = 0;
-
-        while (true) {
-            System.out.print("Enter an integer: ");
-            String input = scanner.nextLine().trim(); // Remove leading/trailing whitespace
-
-            if (input.isEmpty()) {
-                break; // Exit the loop if the input is empty
-            }
-
-            try {
-                int number = Integer.parseInt(input);
-                sum += number;
-                count++;
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input! Please enter an integer.");
+public class ylesanne6 {
+    public static void main(String[] args) {
+        List<Integer> arvud = new ArrayList<>();
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (true) {
+                System.out.print("Sisesta täisarv (jäta tühi kui done): ");
+                String sisend = scanner.nextLine().trim();
+                if (sisend.isEmpty()) {
+                    break;
+                }
+                try {
+                    int arv = Integer.parseInt(sisend);
+                    arvud.add(arv);
+                } catch (NumberFormatException e) {
+                    System.out.println("viga juut.");
+                }
             }
         }
 
-        if (count > 0) {
-            double average = (double) sum / count;
-            System.out.println("Sum of entered integers: " + sum);
-            System.out.println("Average of entered integers: " + average);
+        if (!arvud.isEmpty()) {
+            double keskmine = keskmine(arvud);
+            int summa = summa(arvud);
+
+            try (PrintWriter writer = new PrintWriter("arvud.txt")) {
+                for (int arv : arvud) {
+                    writer.println(arv);
+                }
+                writer.println("Kogusumma: " + summa);
+                writer.println("Keskmine: " + keskmine);
+                System.out.println("Arvud on salvestatud faili arvud.txt");
+            } catch (IOException e) {
+                System.out.println("Viga : " + e.getMessage());
+            }
         } else {
-            System.out.println("No valid integers entered.");
+            System.out.println("Arvude loend on tuhgi debiial ik.");
         }
-
-        scanner.close();
     }
 
+    public static int summa(List<Integer> arvud) {
+        int summa = 0;
+        for (int arv : arvud) {
+            summa += arv;
+        }
+        return summa;
+    }
 
-		
-		
-		
-		Scanner sc= new Scanner(System.in); 
-        System.out.print("Enter a string: ");  
-        String str= sc.nextLine();              
-        System.out.print("You have entered: "+str);             
-        
-
-
-//N HNYJ PÖ88P88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
-//ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
-        File minuFail = new File("MinuTekstifail.txt");
-        try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter(minuFail));
-			bw.write(str);
-			bw.close();
-			System.out.println("Fail loodud!");
-		} catch (IOException e) {
-			e.printStackTrace();
-		
-		
-		
-
- }  
+    public static double keskmine(List<Integer> arvud) {
+        if (arvud.isEmpty()) {
+            return 0;
+        }
+        int summa = summa(arvud);
+        return (double) summa / arvud.size();
+    }
+}
 
 
 
